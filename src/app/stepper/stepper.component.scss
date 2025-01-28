@@ -1,0 +1,8 @@
+:host {
+    flex-grow: 1;
+
+    .stepper {
+        height: 172px;
+        background-image: url('/assets/images/bg-sidebar-mobile.svg');
+    }
+}
