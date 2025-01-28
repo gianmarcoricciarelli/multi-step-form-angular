@@ -1,5 +1,6 @@
 :host {
     flex-grow: 1;
+    position: relative;
 
     .side-bar {
         height: 172px;
@@ -8,6 +9,5 @@
         display: flex;
         justify-content: center;
         gap: 16px;
-        position: relative;
     }
 }
