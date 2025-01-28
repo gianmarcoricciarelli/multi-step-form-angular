@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
-import { StepperComponent } from './stepper/stepper.component'
+import { FormBodyComponent } from './form-body/form-body.component'
 
 @Component({
     selector: 'root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [StepperComponent],
+    imports: [FormBodyComponent],
 })
 export class AppComponent {
     title = 'multi-step-form'

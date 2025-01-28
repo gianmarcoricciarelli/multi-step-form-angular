@@ -2,12 +2,12 @@ import { Component } from '@angular/core'
 import { StepperButtonComponent } from './stepper-button/stepper-button.component'
 
 @Component({
-    selector: 'stepper',
+    selector: 'form-body',
     imports: [StepperButtonComponent],
-    templateUrl: './stepper.component.html',
-    styleUrl: './stepper.component.scss',
+    templateUrl: './form-body.component.html',
+    styleUrl: './form-body.component.scss',
 })
-export class StepperComponent {
+export class FormBodyComponent {
     onStepClick(step: number) {
         console.log(`clicked on child ${step}`)
     }

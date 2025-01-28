@@ -1,12 +1,13 @@
 :host {
     flex-grow: 1;
 
-    .stepper {
+    .side-bar {
         height: 172px;
         background-image: url('/assets/images/bg-sidebar-mobile.svg');
         padding-top: 32px;
         display: flex;
         justify-content: center;
         gap: 16px;
+        position: relative;
     }
 }
