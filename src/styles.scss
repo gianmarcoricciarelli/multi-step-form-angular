@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'ubuntu-regular';
+    src: url('/assets/fonts/Ubuntu-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'ubuntu-medium';
+    src: url('/assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'ubuntu-bold';
+    src: url('/assets/fonts/Ubuntu-Bold.ttf') format('truetype');
+}
+
 *,
 *::before,
 *::after {
@@ -10,6 +25,7 @@
 
 html {
     height: 100%;
+    font-family: 'ubuntu-regular';
 }
 
 body {
@@ -63,4 +79,7 @@ h6 {
 
 :root {
     --background-color: #eff5ff;
+    --white: #ffffff;
+    --sky-blue: #bee2fd;
+    --denim: #022959;
 }

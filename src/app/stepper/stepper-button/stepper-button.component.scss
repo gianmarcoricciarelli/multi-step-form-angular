@@ -1,0 +1,29 @@
+:host {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    border: 1px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all;
+    transition-duration: 300ms;
+
+    span {
+        font-weight: 700;
+        color: var(--white);
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+:host(.selected) {
+    background-color: var(--sky-blue);
+    border: 1px solid var(--sky-blue);
+
+    span {
+        color: var(--denim);
+    }
+}
