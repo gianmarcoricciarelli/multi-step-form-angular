@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common'
-import { Component, HostListener, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { z } from 'zod'
 import {
     FirstStepForm,
@@ -39,7 +39,7 @@ export class NextStepComponent implements OnInit {
         )
     }
 
-    @HostListener('click') onButtonClick() {
+    onButtonClick() {
         switch (this.selectedStep) {
             case 1:
                 const firstStepValidationSchema = z.object({
@@ -75,5 +75,9 @@ export class NextStepComponent implements OnInit {
                 console.log('4')
                 break
         }
+    }
+
+    onGoBackClick() {
+        this.MultiStepFormService.setSelectedStep(this.selectedStep - 1)
     }
 }

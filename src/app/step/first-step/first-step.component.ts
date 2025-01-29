@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import {
@@ -7,7 +8,7 @@ import {
 
 @Component({
     selector: 'first-step',
-    imports: [ReactiveFormsModule],
+    imports: [NgIf, ReactiveFormsModule],
     templateUrl: './first-step.component.html',
     styleUrl: './first-step.component.scss',
 })

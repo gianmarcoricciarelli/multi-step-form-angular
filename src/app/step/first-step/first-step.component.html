@@ -1,19 +1,28 @@
 <form [formGroup]="firstStepFormGroup">
-    <label for="name">Name</label>
+    <div class="label-and-error">
+        <label for="name">Name</label>
+        <span *ngIf="this.formError.name">{{ this.formError.name }}</span>
+    </div>
     <input
         id="name"
         type="text"
         placeholder="e.g. Stephen King"
         formControlName="name"
     />
-    <label for="email">Email Address</label>
+    <div class="label-and-error">
+        <label for="email">Email Address</label>
+        <span *ngIf="this.formError.email">{{ this.formError.email }}</span>
+    </div>
     <input
         id="email"
         type="email"
         placeholder="e.g. stephenking@lorem.com"
         formControlName="email"
     />
-    <label for="phone">Phone Number</label>
+    <div class="label-and-error">
+        <label for="phone">Phone Number</label>
+        <span *ngIf="this.formError.phone">{{ this.formError.phone }}</span>
+    </div>
     <input
         id="phone"
         type="text"

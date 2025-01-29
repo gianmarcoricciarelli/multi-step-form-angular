@@ -1,2 +1,4 @@
-<span *ngIf="selectedStep !== 1">Go back</span>
-<button>{{ selectedStep !== 4 ? 'Next Step' : 'Confirm' }}</button>
+<span *ngIf="selectedStep !== 1" (click)="onGoBackClick()">Go back</span>
+<button (click)="onButtonClick()">
+    {{ selectedStep !== 4 ? 'Next Step' : 'Confirm' }}
+</button>
