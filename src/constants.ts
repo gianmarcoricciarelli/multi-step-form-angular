@@ -1,6 +1,8 @@
+export type Steps = '1' | '2' | '3' | '4'
 export type StepInfo = { title: string; description: string }
-type StepInfos = Record<string, StepInfo>
-
+type StepInfos = {
+    [k in Steps]: StepInfo
+}
 export const stepInfos: StepInfos = {
     '1': {
         title: 'Personal info',
@@ -19,4 +21,12 @@ export const stepInfos: StepInfos = {
         title: 'Finishing up',
         description: 'Double-check everything looks OK before confirming.',
     },
+}
+
+type Plans = 'Arcade' | 'Advanced' | 'Pro'
+export type PlansBilling = { [k in Plans]: { monthly: string; yearly: string } }
+export const plansBilling: PlansBilling = {
+    Arcade: { monthly: '$9/mo', yearly: '$90/yr' },
+    Advanced: { monthly: '$12/mo', yearly: '$120/yr' },
+    Pro: { monthly: '$15/mo', yearly: '$150/yr' },
 }

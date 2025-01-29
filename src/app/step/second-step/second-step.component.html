@@ -1,1 +1,22 @@
-<p>second-step works!</p>
+<div class="card-container">
+    @for (planAndBilling of this.plansAndBillings; track planAndBilling.name) {
+        <div class="card-container__card">
+            <img
+                src="{{
+                    '/assets/images/icon-' +
+                        planAndBilling.name.toLowerCase() +
+                        '.svg'
+                }}"
+                alt="{{ 'plan-' + planAndBilling.name.toLowerCase() }}"
+            />
+            <div class="card-container__card__plan-info">
+                <span class="card-container__card__plan-info__name">{{
+                    planAndBilling.name
+                }}</span>
+                <span class="card-container__card__plan-info__billing">{{
+                    planAndBilling.billing.monthly
+                }}</span>
+            </div>
+        </div>
+    }
+</div>
