@@ -1,5 +1,5 @@
 import { Component, HostListener, input, OnInit } from '@angular/core'
-import { StepSelectionService } from '../../step-selection.service'
+import { MultiStepFormService } from '../../services/multi-step-form.service'
 
 @Component({
     selector: 'stepper-button',
@@ -14,14 +14,14 @@ export class StepperButtonComponent implements OnInit {
     stepNumber = input.required<number>()
     isSelected = false
 
-    constructor(private stepSelectionService: StepSelectionService) {}
+    constructor(private MultiStepFormService: MultiStepFormService) {}
     ngOnInit(): void {
-        this.stepSelectionService.selectedStep$.subscribe((selectedStep) => {
+        this.MultiStepFormService.selectedStep$.subscribe((selectedStep) => {
             this.isSelected = selectedStep === this.stepNumber()
         })
     }
 
     @HostListener('click') onStepButtonClick() {
-        this.stepSelectionService.setSelectedStep(this.stepNumber())
+        this.MultiStepFormService.setSelectedStep(this.stepNumber())
     }
 }

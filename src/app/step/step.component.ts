@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common'
 import { Component } from '@angular/core'
 import { StepInfo, stepInfos } from '../../constants'
-import { StepSelectionService } from '../step-selection.service'
+import { MultiStepFormService } from '../services/multi-step-form.service'
 import { FirstStepComponent } from './first-step/first-step.component'
 
 @Component({
@@ -14,11 +14,10 @@ export class StepComponent {
     selectedStep: number = 1
     stepInfo: StepInfo = stepInfos[1]
 
-    constructor(private stepSelectionService: StepSelectionService) {}
+    constructor(private MultiStepFormService: MultiStepFormService) {}
 
     ngOnInit(): void {
-        this.stepSelectionService.selectedStep$.subscribe((selectedStep) => {
-            console.log(selectedStep)
+        this.MultiStepFormService.selectedStep$.subscribe((selectedStep) => {
             this.selectedStep = selectedStep
             this.stepInfo = stepInfos[selectedStep]
         })

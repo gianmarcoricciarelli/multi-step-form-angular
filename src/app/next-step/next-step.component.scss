@@ -1,0 +1,40 @@
+:host {
+    background-color: var(--white);
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+
+    span {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--grey);
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: var(--denim);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--white);
+        border: 0;
+        border-radius: 4px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+:host(.first-step) {
+    justify-content: flex-end;
+}
+
+:host(.last-step) {
+    button {
+        background-color: var(--purple);
+    }
+}
