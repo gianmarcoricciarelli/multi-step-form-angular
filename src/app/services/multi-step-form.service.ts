@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
+export type FirstStepFormError = {
+    name: boolean
+    email: boolean
+    phone: boolean
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -34,6 +40,18 @@ export class MultiStepFormService {
     }
     setFirstStepPhone(phone: string) {
         this.firstStepPhone.next(phone)
+    }
+    private firstStepFormError = new BehaviorSubject<FirstStepFormError>({
+        name: false,
+        email: false,
+        phone: false,
+    })
+    firstStepFormError$ = this.firstStepFormError.asObservable()
+    getFirstStepFormError() {
+        return this.firstStepFormError.getValue()
+    }
+    setFirstStepFormError(error: FirstStepFormError) {
+        this.firstStepFormError.next(error)
     }
 
     constructor() {}

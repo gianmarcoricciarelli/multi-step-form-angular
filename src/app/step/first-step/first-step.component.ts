@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
-import { MultiStepFormService } from '../../services/multi-step-form.service'
+import {
+    FirstStepFormError,
+    MultiStepFormService,
+} from '../../services/multi-step-form.service'
 
 @Component({
     selector: 'first-step',
@@ -10,6 +13,11 @@ import { MultiStepFormService } from '../../services/multi-step-form.service'
 })
 export class FirstStepComponent implements OnInit {
     firstStepFormGroup!: FormGroup
+    formError: FirstStepFormError = {
+        name: false,
+        email: false,
+        phone: false,
+    }
 
     constructor(private MultiStepFormService: MultiStepFormService) {}
 
@@ -35,5 +43,9 @@ export class FirstStepComponent implements OnInit {
             ?.valueChanges.subscribe((phone) => {
                 this.MultiStepFormService.setFirstStepPhone(phone)
             })
+
+        this.MultiStepFormService.firstStepFormError$.subscribe((error) => {
+            this.formError = error
+        })
     }
 }
