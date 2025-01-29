@@ -13,11 +13,7 @@ import {
 })
 export class FirstStepComponent implements OnInit {
     firstStepFormGroup!: FormGroup
-    formError: FirstStepFormError = {
-        name: false,
-        email: false,
-        phone: false,
-    }
+    formError!: FirstStepFormError
 
     constructor(private MultiStepFormService: MultiStepFormService) {}
 
@@ -33,21 +29,25 @@ export class FirstStepComponent implements OnInit {
                 this.MultiStepFormService.getFirstStepForm().phone
             ),
         })
+        this.formError = this.MultiStepFormService.getFirstStepFormError()
 
         this.firstStepFormGroup
             .get('name')
             ?.valueChanges.subscribe((name: string) => {
                 this.MultiStepFormService.setFirstStepForm({ name })
+                this.MultiStepFormService.setFirstStepFormError({ name: '' })
             })
         this.firstStepFormGroup
             .get('email')
             ?.valueChanges.subscribe((email: string) => {
                 this.MultiStepFormService.setFirstStepForm({ email })
+                this.MultiStepFormService.setFirstStepFormError({ email: '' })
             })
         this.firstStepFormGroup
             .get('phone')
             ?.valueChanges.subscribe((phone: string) => {
                 this.MultiStepFormService.setFirstStepForm({ phone })
+                this.MultiStepFormService.setFirstStepFormError({ phone: '' })
             })
 
         this.MultiStepFormService.firstStepFormError$.subscribe((error) => {

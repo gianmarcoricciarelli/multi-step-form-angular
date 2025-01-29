@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core'
+import { z } from 'zod'
 import {
     FirstStepForm,
     MultiStepFormService,
@@ -36,5 +37,43 @@ export class NextStepComponent implements OnInit {
                 this.firstStepForm = firstStepForm
             }
         )
+    }
+
+    @HostListener('click') onButtonClick() {
+        switch (this.selectedStep) {
+            case 1:
+                const firstStepValidationSchema = z.object({
+                    name: z.string().min(1, 'This field is required'),
+                    email: z
+                        .string()
+                        .min(1, 'This field is required')
+                        .email('This field must be a valid email'),
+                    phone: z.string().min(1, 'This field is required'),
+                })
+                const parsedFormValues = firstStepValidationSchema.safeParse(
+                    this.firstStepForm
+                )
+
+                if (!parsedFormValues.success) {
+                    const errors = parsedFormValues.error.flatten().fieldErrors
+                    this.MultiStepFormService.setFirstStepFormError({
+                        name: errors.name?.[0] || '',
+                        email: errors.email?.[0] || '',
+                        phone: errors.phone?.[0] || '',
+                    })
+                } else {
+                    this.MultiStepFormService.setSelectedStep(2)
+                }
+                break
+            case 2:
+                console.log('2')
+                break
+            case 3:
+                console.log('3')
+                break
+            default:
+                console.log('4')
+                break
+        }
     }
 }
