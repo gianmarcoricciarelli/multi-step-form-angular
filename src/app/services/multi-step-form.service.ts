@@ -6,6 +6,11 @@ export type FirstStepFormError = {
     email: boolean
     phone: boolean
 }
+export type FirstStepForm = {
+    name: string
+    email: string
+    phone: string
+}
 
 @Injectable({
     providedIn: 'root',
@@ -17,29 +22,20 @@ export class MultiStepFormService {
         this.selectedStep.next(step)
     }
 
-    private firstStepName = new BehaviorSubject('')
-    firstStepName$ = this.firstStepName.asObservable()
-    getFirstStepName() {
-        return this.firstStepName.getValue()
+    private firstStepForm = new BehaviorSubject<FirstStepForm>({
+        name: '',
+        email: '',
+        phone: '',
+    })
+    firstStepForm$ = this.firstStepForm.asObservable()
+    getFirstStepForm() {
+        return this.firstStepForm.getValue()
     }
-    setFirstStepName(name: string) {
-        this.firstStepName.next(name)
-    }
-    private firstStepEmail = new BehaviorSubject('')
-    firstStepMail$ = this.firstStepEmail.asObservable()
-    getFirstStepEmail() {
-        return this.firstStepEmail.getValue()
-    }
-    setFirstStepMail(email: string) {
-        this.firstStepEmail.next(email)
-    }
-    private firstStepPhone = new BehaviorSubject('')
-    firstStepPhone$ = this.firstStepPhone.asObservable()
-    getFirstStepPhone() {
-        return this.firstStepPhone.getValue()
-    }
-    setFirstStepPhone(phone: string) {
-        this.firstStepPhone.next(phone)
+    setFirstStepForm(newFormValues: Partial<FirstStepForm>) {
+        this.firstStepForm.next({
+            ...this.firstStepForm.getValue(),
+            ...newFormValues,
+        })
     }
     private firstStepFormError = new BehaviorSubject<FirstStepFormError>({
         name: false,

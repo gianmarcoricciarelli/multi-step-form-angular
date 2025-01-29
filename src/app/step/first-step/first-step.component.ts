@@ -23,25 +23,31 @@ export class FirstStepComponent implements OnInit {
 
     ngOnInit(): void {
         this.firstStepFormGroup = new FormGroup({
-            name: new FormControl(this.MultiStepFormService.getFirstStepName()),
+            name: new FormControl(
+                this.MultiStepFormService.getFirstStepForm().name
+            ),
             email: new FormControl(
-                this.MultiStepFormService.getFirstStepEmail()
+                this.MultiStepFormService.getFirstStepForm().email
             ),
             phone: new FormControl(
-                this.MultiStepFormService.getFirstStepPhone()
+                this.MultiStepFormService.getFirstStepForm().phone
             ),
         })
 
-        this.firstStepFormGroup.get('name')?.valueChanges.subscribe((name) => {
-            this.MultiStepFormService.setFirstStepName(name)
-        })
-        this.firstStepFormGroup.get('mail')?.valueChanges.subscribe((mail) => {
-            this.MultiStepFormService.setFirstStepMail(mail)
-        })
+        this.firstStepFormGroup
+            .get('name')
+            ?.valueChanges.subscribe((name: string) => {
+                this.MultiStepFormService.setFirstStepForm({ name })
+            })
+        this.firstStepFormGroup
+            .get('email')
+            ?.valueChanges.subscribe((email: string) => {
+                this.MultiStepFormService.setFirstStepForm({ email })
+            })
         this.firstStepFormGroup
             .get('phone')
-            ?.valueChanges.subscribe((phone) => {
-                this.MultiStepFormService.setFirstStepPhone(phone)
+            ?.valueChanges.subscribe((phone: string) => {
+                this.MultiStepFormService.setFirstStepForm({ phone })
             })
 
         this.MultiStepFormService.firstStepFormError$.subscribe((error) => {

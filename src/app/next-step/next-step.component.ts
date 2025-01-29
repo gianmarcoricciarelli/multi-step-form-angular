@@ -1,6 +1,9 @@
 import { NgIf } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { MultiStepFormService } from '../services/multi-step-form.service'
+import {
+    FirstStepForm,
+    MultiStepFormService,
+} from '../services/multi-step-form.service'
 
 @Component({
     selector: 'next-step',
@@ -15,11 +18,23 @@ import { MultiStepFormService } from '../services/multi-step-form.service'
 export class NextStepComponent implements OnInit {
     selectedStep = 1
 
+    firstStepForm: FirstStepForm = {
+        name: '',
+        email: '',
+        phone: '',
+    }
+
     constructor(private MultiStepFormService: MultiStepFormService) {}
 
     ngOnInit(): void {
         this.MultiStepFormService.selectedStep$.subscribe((selectedStep) => {
             this.selectedStep = selectedStep
         })
+
+        this.MultiStepFormService.firstStepForm$.subscribe(
+            (firstStepForm: FirstStepForm) => {
+                this.firstStepForm = firstStepForm
+            }
+        )
     }
 }
