@@ -3,10 +3,11 @@ import { Component } from '@angular/core'
 import { StepInfo, stepInfos } from '../../constants'
 import { MultiStepFormService } from '../services/multi-step-form.service'
 import { FirstStepComponent } from './first-step/first-step.component'
+import { SecondStepComponent } from './second-step/second-step.component'
 
 @Component({
     selector: 'step',
-    imports: [NgIf, FirstStepComponent],
+    imports: [NgIf, FirstStepComponent, SecondStepComponent],
     templateUrl: './step.component.html',
     styleUrl: './step.component.scss',
 })
