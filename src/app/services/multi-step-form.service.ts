@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
+import { Billing, Plan } from '../../constants'
 
 export type FirstStepFormError = {
     name: string
@@ -51,6 +52,20 @@ export class MultiStepFormService {
             ...this.firstStepFormError.getValue(),
             ...error,
         })
+    }
+
+    private secondStepForm = new BehaviorSubject<
+        { name: Plan; billing: Billing } | undefined
+    >(undefined)
+    secondStepForm$ = this.secondStepForm.asObservable()
+    getSecondStepForm() {
+        return this.secondStepForm.getValue()
+    }
+    setSecondStepForm(selectedPlanAndBilling: {
+        name: Plan
+        billing: Billing
+    }) {
+        this.secondStepForm.next(selectedPlanAndBilling)
     }
 
     constructor() {}

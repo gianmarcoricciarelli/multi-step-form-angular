@@ -1,6 +1,13 @@
 <div class="card-container">
     @for (planAndBilling of this.plansAndBillings; track planAndBilling.name) {
-        <div class="card-container__card">
+        <div
+            class="card-container__card"
+            [ngClass]="{
+                'card-container--selected':
+                    this.selectedPlanAndBilling?.name === planAndBilling.name,
+            }"
+            (click)="onPlanClick(planAndBilling.name)"
+        >
             <img
                 src="{{
                     '/assets/images/icon-' +

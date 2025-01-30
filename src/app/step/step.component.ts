@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common'
 import { Component } from '@angular/core'
-import { StepInfo, stepInfos, Steps } from '../../constants'
+import { Step, StepInfo, stepInfos } from '../../constants'
 import { MultiStepFormService } from '../services/multi-step-form.service'
 import { FirstStepComponent } from './first-step/first-step.component'
 import { SecondStepComponent } from './second-step/second-step.component'
@@ -20,7 +20,7 @@ export class StepComponent {
     ngOnInit(): void {
         this.MultiStepFormService.selectedStep$.subscribe((selectedStep) => {
             this.selectedStep = selectedStep
-            this.stepInfo = stepInfos[selectedStep.toString() as Steps]
+            this.stepInfo = stepInfos[selectedStep.toString() as Step]
         })
     }
 }

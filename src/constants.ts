@@ -1,7 +1,7 @@
-export type Steps = '1' | '2' | '3' | '4'
+export type Step = '1' | '2' | '3' | '4'
 export type StepInfo = { title: string; description: string }
-type StepInfos = {
-    [k in Steps]: StepInfo
+export type StepInfos = {
+    [k in Step]: StepInfo
 }
 export const stepInfos: StepInfos = {
     '1': {
@@ -23,9 +23,10 @@ export const stepInfos: StepInfos = {
     },
 }
 
-type Plans = 'Arcade' | 'Advanced' | 'Pro'
-export type PlansBilling = { [k in Plans]: { monthly: string; yearly: string } }
-export const plansBilling: PlansBilling = {
+export type Plan = 'Arcade' | 'Advanced' | 'Pro'
+export type Billing = 'monthly' | 'yearly'
+export type PlanBilling = { [K in Billing]: string }
+export const plansWithBillings: Record<Plan, PlanBilling> = {
     Arcade: { monthly: '$9/mo', yearly: '$90/yr' },
     Advanced: { monthly: '$12/mo', yearly: '$120/yr' },
     Pro: { monthly: '$15/mo', yearly: '$150/yr' },
