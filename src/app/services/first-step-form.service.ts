@@ -15,7 +15,7 @@ export type FirstStepForm = {
 @Injectable({
     providedIn: 'root',
 })
-export class MultiStepFormService {
+export class FirstStepFormService {
     private selectedStep = new BehaviorSubject(1)
     selectedStep$ = this.selectedStep.asObservable()
     setSelectedStep(step: number) {

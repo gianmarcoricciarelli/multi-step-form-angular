@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core'
 import { z } from 'zod'
 import {
     FirstStepForm,
-    MultiStepFormService,
-} from '../services/multi-step-form.service'
+    FirstStepFormService,
+} from '../services/first-step-form.service'
 
 @Component({
     selector: 'next-step',
@@ -25,17 +25,17 @@ export class NextStepComponent implements OnInit {
         phone: '',
     }
 
-    constructor(private MultiStepFormService: MultiStepFormService) {}
+    constructor(private FirstStepFormService: FirstStepFormService) {}
 
     ngOnInit(): void {
-        this.MultiStepFormService.selectedStep$.subscribe((selectedStep) => {
+        this.FirstStepFormService.selectedStep$.subscribe((selectedStep) => {
             this.selectedStep = selectedStep
         })
 
-        this.MultiStepFormService.firstStepForm$.subscribe(
+        this.FirstStepFormService.firstStepForm$.subscribe(
             (firstStepForm: FirstStepForm) => {
                 this.firstStepForm = firstStepForm
-            }
+            },
         )
     }
 
@@ -51,18 +51,18 @@ export class NextStepComponent implements OnInit {
                     phone: z.string().min(1, 'This field is required'),
                 })
                 const parsedFormValues = firstStepValidationSchema.safeParse(
-                    this.firstStepForm
+                    this.firstStepForm,
                 )
 
                 if (!parsedFormValues.success) {
                     const errors = parsedFormValues.error.flatten().fieldErrors
-                    this.MultiStepFormService.setFirstStepFormError({
+                    this.FirstStepFormService.setFirstStepFormError({
                         name: errors.name?.[0] || '',
                         email: errors.email?.[0] || '',
                         phone: errors.phone?.[0] || '',
                     })
                 } else {
-                    this.MultiStepFormService.setSelectedStep(2)
+                    this.FirstStepFormService.setSelectedStep(2)
                 }
                 break
             case 2:
@@ -78,6 +78,6 @@ export class NextStepComponent implements OnInit {
     }
 
     onGoBackClick() {
-        this.MultiStepFormService.setSelectedStep(this.selectedStep - 1)
+        this.FirstStepFormService.setSelectedStep(this.selectedStep - 1)
     }
 }

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import {
     FirstStepFormError,
-    MultiStepFormService,
-} from '../../services/multi-step-form.service'
+    FirstStepFormService,
+} from '../../services/first-step-form.service'
 
 @Component({
     selector: 'first-step',
@@ -16,42 +16,42 @@ export class FirstStepComponent implements OnInit {
     firstStepFormGroup!: FormGroup
     formError!: FirstStepFormError
 
-    constructor(private MultiStepFormService: MultiStepFormService) {}
+    constructor(private FirstStepFormService: FirstStepFormService) {}
 
     ngOnInit(): void {
         this.firstStepFormGroup = new FormGroup({
             name: new FormControl(
-                this.MultiStepFormService.getFirstStepForm().name
+                this.FirstStepFormService.getFirstStepForm().name,
             ),
             email: new FormControl(
-                this.MultiStepFormService.getFirstStepForm().email
+                this.FirstStepFormService.getFirstStepForm().email,
             ),
             phone: new FormControl(
-                this.MultiStepFormService.getFirstStepForm().phone
+                this.FirstStepFormService.getFirstStepForm().phone,
             ),
         })
-        this.formError = this.MultiStepFormService.getFirstStepFormError()
+        this.formError = this.FirstStepFormService.getFirstStepFormError()
 
         this.firstStepFormGroup
             .get('name')
             ?.valueChanges.subscribe((name: string) => {
-                this.MultiStepFormService.setFirstStepForm({ name })
-                this.MultiStepFormService.setFirstStepFormError({ name: '' })
+                this.FirstStepFormService.setFirstStepForm({ name })
+                this.FirstStepFormService.setFirstStepFormError({ name: '' })
             })
         this.firstStepFormGroup
             .get('email')
             ?.valueChanges.subscribe((email: string) => {
-                this.MultiStepFormService.setFirstStepForm({ email })
-                this.MultiStepFormService.setFirstStepFormError({ email: '' })
+                this.FirstStepFormService.setFirstStepForm({ email })
+                this.FirstStepFormService.setFirstStepFormError({ email: '' })
             })
         this.firstStepFormGroup
             .get('phone')
             ?.valueChanges.subscribe((phone: string) => {
-                this.MultiStepFormService.setFirstStepForm({ phone })
-                this.MultiStepFormService.setFirstStepFormError({ phone: '' })
+                this.FirstStepFormService.setFirstStepForm({ phone })
+                this.FirstStepFormService.setFirstStepFormError({ phone: '' })
             })
 
-        this.MultiStepFormService.firstStepFormError$.subscribe((error) => {
+        this.FirstStepFormService.firstStepFormError$.subscribe((error) => {
             this.formError = error
         })
     }
