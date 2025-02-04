@@ -4,11 +4,15 @@
     gap: 16px;
 
     .card-container {
+        background-color: var(--white);
         display: flex;
         flex-direction: column;
         gap: 8px;
+        transition: all;
+        transition-duration: 300ms;
 
         &--selected {
+            background-color: var(--very-light-grey) !important;
             border: 1px solid var(--purple) !important;
         }
 

@@ -4,7 +4,7 @@
             class="card-container__card"
             [ngClass]="{
                 'card-container--selected':
-                    this.selectedPlanAndBilling?.name === planAndBilling.name,
+                    this.selectedPlanAndBilling.name === planAndBilling.name,
             }"
             (click)="onPlanClick(planAndBilling.name)"
         >
