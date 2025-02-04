@@ -31,3 +31,39 @@ export const plansWithBillings: Record<Plan, PlanBilling> = {
     Advanced: { monthly: '$12/mo', yearly: '$120/yr' },
     Pro: { monthly: '$15/mo', yearly: '$150/yr' },
 }
+
+export type AddOnName =
+    | 'Online service'
+    | 'Larger storage'
+    | 'Customizable profile'
+export type AddOn = {
+    name: AddOnName
+    description: string
+    billing: Record<Billing, string>
+}
+export const addOns: AddOn[] = [
+    {
+        name: 'Online service',
+        description: 'Access to multiplayer games',
+        billing: {
+            monthly: '$1/mo',
+            yearly: '$10/yr',
+        },
+    },
+    {
+        name: 'Larger storage',
+        description: 'Extra 1TB of cloud save',
+        billing: {
+            monthly: '$1/mo',
+            yearly: '$10/yr',
+        },
+    },
+    {
+        name: 'Customizable profile',
+        description: 'Custom theme on your profile',
+        billing: {
+            monthly: '$2/mo',
+            yearly: '$20/yr',
+        },
+    },
+]

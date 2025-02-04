@@ -1,0 +1,29 @@
+<div class="add-ons-container">
+    @for (addOn of availableAddOns; track addOn.name) {
+        <div class="add-ons-container__add-on" (click)="onAddOnClick(addOn)">
+            <div class="add-ons-container__add-on__info-and-checkbox">
+                <input
+                    type="checkbox"
+                    [checked]="selectedAddonsNames.includes(addOn.name)"
+                />
+                <div class="add-ons-container__add-on__info-and-checkbox__info">
+                    <span
+                        class="add-ons-container__add-on__info-and-checkbox__info__name"
+                        >{{ addOn.name }}</span
+                    >
+                    <span
+                        class="add-ons-container__add-on__info-and-checkbox__info__description"
+                        >{{ addOn.description }}</span
+                    >
+                </div>
+            </div>
+            <span class="add-ons-container__add-on__billing">
+                @if (billing === 'monthly') {
+                    {{ addOn.billing['monthly'] }}
+                } @else {
+                    {{ addOn.billing['yearly'] }}
+                }
+            </span>
+        </div>
+    }
+</div>

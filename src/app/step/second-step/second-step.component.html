@@ -33,7 +33,7 @@
             class="toggle-container__toggle-and-billing__billing"
             [ngClass]="{
                 'toggle-container__toggle-and-billing__billing--selected':
-                    selectedPlanAndBilling?.billing === 'monthly',
+                    selectedPlanAndBilling.billing === 'monthly',
             }"
             >Monthly</span
         >
@@ -50,7 +50,7 @@
             class="toggle-container__toggle-and-billing__billing"
             [ngClass]="{
                 'toggle-container__toggle-and-billing__billing--selected':
-                    selectedPlanAndBilling?.billing === 'yearly',
+                    selectedPlanAndBilling.billing === 'yearly',
             }"
             >Yearly</span
         >
