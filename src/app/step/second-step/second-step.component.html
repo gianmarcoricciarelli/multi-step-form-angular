@@ -27,3 +27,32 @@
         </div>
     }
 </div>
+<div class="toggle-container">
+    <div class="toggle-container__toggle-and-billing">
+        <span
+            class="toggle-container__toggle-and-billing__billing"
+            [ngClass]="{
+                'toggle-container__toggle-and-billing__billing--selected':
+                    selectedPlanAndBilling?.billing === 'monthly',
+            }"
+            >Monthly</span
+        >
+        <div
+            class="toggle-container__toggle-and-billing__toggle"
+            (click)="onToggleClick()"
+        >
+            <div
+                #toggleCircle
+                class="toggle-container__toggle-and-billing__toggle__circle"
+            ></div>
+        </div>
+        <span
+            class="toggle-container__toggle-and-billing__billing"
+            [ngClass]="{
+                'toggle-container__toggle-and-billing__billing--selected':
+                    selectedPlanAndBilling?.billing === 'yearly',
+            }"
+            >Yearly</span
+        >
+    </div>
+</div>

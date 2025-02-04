@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import {
     Billing,
     Plan,
@@ -21,8 +21,9 @@ export class SecondStepComponent implements OnInit {
         name: planName as Plan,
         billing: planBilling,
     }))
-    selectedPlanAndBilling: { name: Plan; billing: Billing } | undefined =
-        undefined
+    selectedPlanAndBilling!: { name: Plan; billing: Billing }
+
+    @ViewChild('toggleCircle') toggleCircleRef!: ElementRef<HTMLDivElement>
 
     constructor(private secondStepFormService: SecondStepFormService) {}
 
@@ -35,16 +36,26 @@ export class SecondStepComponent implements OnInit {
     }
 
     onPlanClick(planName: Plan) {
-        if (!this.secondStepFormService.getSecondStepForm()) {
+        this.secondStepFormService.setSecondStepForm({
+            name: planName,
+            billing: this.selectedPlanAndBilling.billing,
+        })
+    }
+
+    onToggleClick() {
+        this.toggleCircleRef.nativeElement.classList.toggle(
+            'toggle-container__toggle-and-billing__toggle__circle--right',
+        )
+
+        if (this.selectedPlanAndBilling?.billing === 'monthly') {
             this.secondStepFormService.setSecondStepForm({
-                name: planName,
-                billing: 'monthly',
+                name: this.selectedPlanAndBilling!.name,
+                billing: 'yearly',
             })
         } else {
             this.secondStepFormService.setSecondStepForm({
-                name: planName,
-                billing:
-                    this.secondStepFormService.getSecondStepForm()!.billing,
+                name: this.selectedPlanAndBilling!.name,
+                billing: 'monthly',
             })
         }
     }
