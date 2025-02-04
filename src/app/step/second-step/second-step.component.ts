@@ -1,11 +1,6 @@
 import { NgClass } from '@angular/common'
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
-import {
-    Billing,
-    Plan,
-    PlanBilling,
-    plansWithBillings,
-} from '../../../constants'
+import { Component } from '@angular/core'
+import { Plan, PlanBilling, plansWithBillings } from '../../../constants'
 import { SecondStepFormService } from '../../services/second-step.service'
 
 @Component({
@@ -14,49 +9,41 @@ import { SecondStepFormService } from '../../services/second-step.service'
     templateUrl: './second-step.component.html',
     styleUrl: './second-step.component.scss',
 })
-export class SecondStepComponent implements OnInit {
+export class SecondStepComponent {
     plansAndBillings: { name: Plan; billing: PlanBilling }[] = Object.entries(
         plansWithBillings,
     ).map(([planName, planBilling]) => ({
         name: planName as Plan,
         billing: planBilling,
     }))
-    selectedPlanAndBilling!: { name: Plan; billing: Billing }
-
-    @ViewChild('toggleCircle') toggleCircleRef!: ElementRef<HTMLDivElement>
 
     constructor(private secondStepFormService: SecondStepFormService) {}
 
-    ngOnInit(): void {
-        this.secondStepFormService.secondStepForm$.subscribe(
-            (selectedPlanAndBilling) => {
-                this.selectedPlanAndBilling = selectedPlanAndBilling
-            },
-        )
+    get secondStepName() {
+        return this.secondStepFormService.secondStepForm.name
+    }
+    get secondStepBilling() {
+        return this.secondStepFormService.secondStepForm.billing
     }
 
     onPlanClick(planName: Plan) {
-        this.secondStepFormService.setSecondStepForm({
+        this.secondStepFormService.secondStepForm = {
             name: planName,
-            billing: this.selectedPlanAndBilling.billing,
-        })
+            billing: this.secondStepFormService.secondStepForm.billing,
+        }
     }
 
     onToggleClick() {
-        this.toggleCircleRef.nativeElement.classList.toggle(
-            'toggle-container__toggle-and-billing__toggle__circle--right',
-        )
-
-        if (this.selectedPlanAndBilling?.billing === 'monthly') {
-            this.secondStepFormService.setSecondStepForm({
-                name: this.selectedPlanAndBilling!.name,
+        if (this.secondStepFormService.secondStepForm.billing === 'monthly') {
+            this.secondStepFormService.secondStepForm = {
+                name: this.secondStepFormService.secondStepForm.name,
                 billing: 'yearly',
-            })
+            }
         } else {
-            this.secondStepFormService.setSecondStepForm({
-                name: this.selectedPlanAndBilling!.name,
+            this.secondStepFormService.secondStepForm = {
+                name: this.secondStepFormService.secondStepForm.name,
                 billing: 'monthly',
-            })
+            }
         }
     }
 }

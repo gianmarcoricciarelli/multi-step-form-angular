@@ -6,13 +6,14 @@ import { AddOn } from '../../constants'
     providedIn: 'root',
 })
 export class ThirdStepService {
-    private selectedAddons = new BehaviorSubject<AddOn[]>([])
-    selectedAddons$ = this.selectedAddons.asObservable()
-    getSelectedAddons() {
-        return this.selectedAddons.getValue()
+    private _selectedAddons = new BehaviorSubject<AddOn[]>([])
+
+    get selectedAddons() {
+        return this._selectedAddons.getValue()
     }
-    setSelectedAddons(addOns: AddOn[]) {
-        this.selectedAddons.next(addOns)
+
+    set selectedAddons(addOns: AddOn[]) {
+        this._selectedAddons.next(addOns)
     }
 
     constructor() {}

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { AddOn, addOns, Billing } from '../../../constants'
+import { Component } from '@angular/core'
+import { AddOn, addOns } from '../../../constants'
 import { SecondStepFormService } from '../../services/second-step.service'
 import { ThirdStepService } from '../../services/third-step.service'
 
@@ -9,13 +9,15 @@ import { ThirdStepService } from '../../services/third-step.service'
     templateUrl: './third-step.component.html',
     styleUrl: './third-step.component.scss',
 })
-export class ThirdStepComponent implements OnInit {
+export class ThirdStepComponent {
     availableAddOns = addOns
-    selectedAddons!: AddOn[]
-    billing!: Billing
 
     get selectedAddonsNames() {
-        return this.selectedAddons.map((addOn) => addOn.name)
+        return this.thirdStepService.selectedAddons.map((addOn) => addOn.name)
+    }
+
+    get billing() {
+        return this.secondStepService.secondStepForm.billing
     }
 
     constructor(
@@ -23,27 +25,21 @@ export class ThirdStepComponent implements OnInit {
         private thirdStepService: ThirdStepService,
     ) {}
 
-    ngOnInit(): void {
-        this.secondStepService.secondStepForm$.subscribe(
-            (selectedPlanAndBilling) => {
-                this.billing = selectedPlanAndBilling.billing
-            },
-        )
-        this.thirdStepService.selectedAddons$.subscribe((addOns) => {
-            this.selectedAddons = addOns
-        })
-    }
-
     onAddOnClick(addOn: AddOn) {
-        if (this.selectedAddons.map((aO) => aO.name).includes(addOn.name)) {
-            this.thirdStepService.setSelectedAddons(
-                this.selectedAddons.filter((aO) => aO.name !== addOn.name),
-            )
+        if (
+            this.thirdStepService.selectedAddons
+                .map((aO) => aO.name)
+                .includes(addOn.name)
+        ) {
+            this.thirdStepService.selectedAddons =
+                this.thirdStepService.selectedAddons.filter(
+                    (aO) => aO.name !== addOn.name,
+                )
         } else {
-            this.thirdStepService.setSelectedAddons([
-                ...this.selectedAddons,
+            this.thirdStepService.selectedAddons = [
+                ...this.thirdStepService.selectedAddons,
                 addOn,
-            ])
+            ]
         }
     }
 }

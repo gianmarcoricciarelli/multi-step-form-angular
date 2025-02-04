@@ -8,18 +8,19 @@ import { Billing, Plan } from '../../constants'
 export class SecondStepFormService {
     constructor() {}
 
-    private secondStepForm = new BehaviorSubject<{
+    private _secondStepForm = new BehaviorSubject<{
         name: Plan
         billing: Billing
     }>({ name: 'Arcade', billing: 'monthly' })
-    secondStepForm$ = this.secondStepForm.asObservable()
-    getSecondStepForm() {
-        return this.secondStepForm.getValue()
+
+    get secondStepForm() {
+        return this._secondStepForm.getValue()
     }
-    setSecondStepForm(selectedPlanAndBilling: {
+
+    set secondStepForm(selectedPlanAndBilling: {
         name: Plan
         billing: Billing
     }) {
-        this.secondStepForm.next(selectedPlanAndBilling)
+        this._secondStepForm.next(selectedPlanAndBilling)
     }
 }

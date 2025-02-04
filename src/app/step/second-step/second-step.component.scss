@@ -68,6 +68,8 @@
                 font-size: 14px;
                 font-weight: 700;
                 color: var(--grey);
+                transition: all;
+                transition-duration: 300ms;
 
                 &--selected {
                     color: var(--denim);

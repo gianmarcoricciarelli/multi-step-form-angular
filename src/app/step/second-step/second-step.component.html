@@ -4,7 +4,7 @@
             class="card-container__card"
             [ngClass]="{
                 'card-container--selected':
-                    this.selectedPlanAndBilling.name === planAndBilling.name,
+                    this.secondStepName === planAndBilling.name,
             }"
             (click)="onPlanClick(planAndBilling.name)"
         >
@@ -33,7 +33,7 @@
             class="toggle-container__toggle-and-billing__billing"
             [ngClass]="{
                 'toggle-container__toggle-and-billing__billing--selected':
-                    selectedPlanAndBilling.billing === 'monthly',
+                    this.secondStepBilling === 'monthly',
             }"
             >Monthly</span
         >
@@ -42,15 +42,18 @@
             (click)="onToggleClick()"
         >
             <div
-                #toggleCircle
                 class="toggle-container__toggle-and-billing__toggle__circle"
+                [ngClass]="{
+                    'toggle-container__toggle-and-billing__toggle__circle--right':
+                        this.secondStepBilling === 'yearly',
+                }"
             ></div>
         </div>
         <span
             class="toggle-container__toggle-and-billing__billing"
             [ngClass]="{
                 'toggle-container__toggle-and-billing__billing--selected':
-                    selectedPlanAndBilling.billing === 'yearly',
+                    this.secondStepBilling === 'yearly',
             }"
             >Yearly</span
         >
