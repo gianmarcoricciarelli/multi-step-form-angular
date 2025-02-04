@@ -6,7 +6,7 @@ import {
     PlanBilling,
     plansWithBillings,
 } from '../../../constants'
-import { MultiStepFormService } from '../../services/multi-step-form.service'
+import { SecondStepFormService } from '../../services/second-step.service'
 
 @Component({
     selector: 'second-step',
@@ -24,10 +24,10 @@ export class SecondStepComponent implements OnInit {
     selectedPlanAndBilling: { name: Plan; billing: Billing } | undefined =
         undefined
 
-    constructor(private multiStepFormService: MultiStepFormService) {}
+    constructor(private secondStepFormService: SecondStepFormService) {}
 
     ngOnInit(): void {
-        this.multiStepFormService.secondStepForm$.subscribe(
+        this.secondStepFormService.secondStepForm$.subscribe(
             (selectedPlanAndBilling) => {
                 this.selectedPlanAndBilling = selectedPlanAndBilling
             },
@@ -35,15 +35,16 @@ export class SecondStepComponent implements OnInit {
     }
 
     onPlanClick(planName: Plan) {
-        if (!this.multiStepFormService.getSecondStepForm()) {
-            this.multiStepFormService.setSecondStepForm({
+        if (!this.secondStepFormService.getSecondStepForm()) {
+            this.secondStepFormService.setSecondStepForm({
                 name: planName,
                 billing: 'monthly',
             })
         } else {
-            this.multiStepFormService.setSecondStepForm({
+            this.secondStepFormService.setSecondStepForm({
                 name: planName,
-                billing: this.multiStepFormService.getSecondStepForm()!.billing,
+                billing:
+                    this.secondStepFormService.getSecondStepForm()!.billing,
             })
         }
     }
